@@ -31,8 +31,8 @@
                   <b-td>
                     <b-button v-b-modal="'modal-multi-'+index" variant="primary">edit</b-button>
                     <button @click="deleteItem(index, item.id)" class="btn btn-danger mx-1">delete</button>
-                    <b-modal :id="'modal-multi-'+index" size="lg" :title="'edit user id : '+item.id" hide-footer>
-                      <b-form @submit.stop.prevent="onSubmit(item)">
+                    <b-modal :id="'modal-multi-'+index"  size="lg" :title="'edit user id : '+item.id" @ok="onSubmit(item)" ok-title="submit">
+                      <b-form>
                         <b-form-group
                           id="input-group-1"
                           label="Email address:"
@@ -77,9 +77,6 @@
                             placeholder="Enter age"
                           ></b-form-input>
                         </b-form-group>
-                        <div class="text-right">
-                          <b-button type="submit" variant="primary" >Submit</b-button>
-                        </div>
                       </b-form>
                     </b-modal>
                   </b-td>
@@ -168,9 +165,7 @@ export default class tableList extends Vue {
       email: evt.email,
       age: evt.age
     })
-      .then(res => {
-        console.log(res)
-      })
+      .then(res => console.log(res))
       .catch(error => console.log(error))
   }
   deleteItem (index: number, id: string) {
